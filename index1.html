@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parking Slots</title>
+</head>
+<body>
+  <h1>Parking Slot Status</h1>
+  <div id="slots"></div>
+
+  <script>
+    async function fetchSlots() {
+      let res = await fetch("http://127.0.0.1:5000/slots");
+      let data = await res.json();
+      let html = "";
+      for (let slot in data) {
+        html += `<p>Slot ${slot}: <b>${data[slot]}</b></p>`;
+      }
+      document.getElementById("slots").innerHTML = html;
+    }
+
+    setInterval(fetchSlots, 2000);
+    fetchSlots();
+  </script>
+</body>
+</html>
